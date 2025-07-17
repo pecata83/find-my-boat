@@ -1,10 +1,10 @@
-## AWS Amplify Angular.js Starter Template
+# Find My Boat
 
-This repository provides a starter template for creating applications using Angular.js and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+Find My Boat is a web application built with Angular.js and AWS Amplify, designed to help users locate and manage boats efficiently. The project features seamless integration with AWS services for authentication, API management, and real-time data storage.
 
 ## Overview
 
-This template equips you with a foundational Angular.js application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+This application provides a robust foundation for boat tracking and management, leveraging AWS Cognito for secure user authentication, AWS AppSync for scalable GraphQL APIs, and Amazon DynamoDB for fast, reliable data storage. It is optimized for scalability and ease of deployment, making it suitable for both individual developers and teams.
 
 ## Features
 
@@ -12,9 +12,19 @@ This template equips you with a foundational Angular.js application integrated w
 - **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
 - **Database**: Real-time database powered by Amazon DynamoDB.
 
+
 ## Deploying to AWS
 
 For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/angular/start/quickstart/#deploy-a-fullstack-app-to-aws) of our documentation.
+
+## Development Workflow
+
+This project uses [Husky](https://typicode.github.io/husky/) to enforce Git hooks and [Conventional Commits](https://www.conventionalcommits.org/) for consistent commit messages. Husky automatically checks commit messages and runs linting before code is committed, helping maintain code quality and a readable commit history.
+
+- **Husky**: Prevents bad commits and enforces pre-commit checks.
+- **Conventional Commits**: Standardizes commit messages for easier automation and changelog generation.
+
+To get started, install dependencies and follow the commit message guidelines in the [Conventional Commits documentation](https://www.conventionalcommits.org/en/v1.0.0/).
 
 ## Security
 
