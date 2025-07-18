@@ -1,4 +1,5 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
+import { postConfirmation } from "../auth/post-confirmation/resource";
 
 const schema = a.schema({
   Todo: a
@@ -6,7 +7,17 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
-});
+
+  User: a
+    .model({
+      name: a.string(),
+      email: a.email(),
+      state: a.json(),
+      profileOwner: a.string(),
+      // boats: a.hasMany("Boat", "ownerId"),
+    })
+    .authorization(allow => [allow.owner()]),
+}).authorization((allow) => [allow.resource(postConfirmation)]);;
 
 export type Schema = ClientSchema<typeof schema>;
 
