@@ -21,6 +21,3 @@ frontend:
     paths:
       - .npm/**/*
       - node_modules/**/*
-  env:
-    variables:
-      _CUSTOM_IMAGE: "public.ecr.aws/docker/library/node:20"

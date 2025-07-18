@@ -9,10 +9,10 @@ Amplify.configure(outputs);
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
   imports: [RouterOutlet, AmplifyAuthenticatorModule],
+  standalone: true,
+  templateUrl: './app.html',
+  styleUrl: './app.css',
 })
 export class AppComponent {
   title = 'amplify-angular-template';
