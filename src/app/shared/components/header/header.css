@@ -1,0 +1,38 @@
+nav {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+}
+
+nav.nav-pills {
+  background-color: #ffffff; /* Greek white */
+  box-shadow: 0 2px 8px rgba(0, 56, 168, 0.08); /* Greek blue shadow */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-right: 2rem;
+}
+
+nav li:last-child {
+  margin-right: 0;
+}
+
+nav a {
+  color: #0038a8; /* Greek blue */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #4fc3f7;
+}

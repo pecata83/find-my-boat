@@ -3,13 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { Amplify } from 'aws-amplify';
 import outputs from '../../amplify_outputs.json';
 
-import { AmplifyAuthenticatorModule, AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Footer, Header } from './shared/components';
 
 Amplify.configure(outputs);
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AmplifyAuthenticatorModule],
+  imports: [RouterOutlet, Header, Footer],
   standalone: true,
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -17,7 +17,7 @@ Amplify.configure(outputs);
 export class AppComponent {
   title = 'amplify-angular-template';
 
-  constructor(public authenticator: AuthenticatorService) {
+  constructor() {
     Amplify.configure(outputs);
   }
 }
