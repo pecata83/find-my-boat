@@ -11,8 +11,6 @@ export class AuthService {
     private _isLoggedIn = signal<boolean>(false);
     private _currentUser = signal<User | null>(null);
     private _users: User[] = []
-    // private authenticatorService = inject(AuthenticatorService)
-    // private amplifySignOut = inject(signOut)
 
     public isLoggedIn = this._isLoggedIn.asReadonly();
     public currentUser = this._currentUser.asReadonly();
