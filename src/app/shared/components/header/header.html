@@ -12,7 +12,7 @@
                         <a class="nav-link" routerLink="/profile">Hi {{ currentUser()?.username }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" (click)="logout()">Logout</a>
+                        <a class="nav-link" href="" (click)="logout($event)">Logout</a>
                     </li>
                     } @else {
                     <li class="nav-item m-0">

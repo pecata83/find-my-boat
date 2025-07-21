@@ -1,5 +1,7 @@
-import { Injectable, signal } from "@angular/core";
-import { User } from "../../models";
+import { inject, Injectable, signal } from "@angular/core";
+import { User, UserLoginData } from "../../models";
+// import { AuthenticatorService } from "@aws-amplify/ui-angular";
+import { signOut } from 'aws-amplify/auth';
 
 @Injectable({
     providedIn: 'root'
@@ -8,26 +10,9 @@ import { User } from "../../models";
 export class AuthService {
     private _isLoggedIn = signal<boolean>(false);
     private _currentUser = signal<User | null>(null);
-    private _users: User[] = [
-        {
-            id: '5fa64b162183ce1728ff371d',
-            username: 'John',
-            email: 'john.doe@gmail.com',
-            phone: '+359 885 888 888'
-        },
-        {
-            id: '5fa64b162183ce1728ff371e',
-            username: 'Jane',
-            email: 'john.doe@gmail.com',
-            phone: '+359 885 888 888'
-        },
-        {
-            id: '5fa64b162183ce1728ff371f',
-            username: 'David',
-            email: 'john.doe@gmail.com',
-            phone: '+359 885 888 888'
-        }
-    ]
+    private _users: User[] = []
+    // private authenticatorService = inject(AuthenticatorService)
+    // private amplifySignOut = inject(signOut)
 
     public isLoggedIn = this._isLoggedIn.asReadonly();
     public currentUser = this._currentUser.asReadonly();
@@ -41,9 +26,17 @@ export class AuthService {
         }
     }
 
-    login(email: string, password: string): boolean {
-        if (email && password) {
-            const user = this._users[0];
+    login(data: UserLoginData): boolean {
+        if (data) {
+            console.log(data)
+            const user = {
+                id: data.userId,
+                username: data.signInDetails.loginId.split('@')[0],
+                email: data.signInDetails.loginId,
+                phone: '+359 885 888 888'
+            };
+
+            // ToDO get user profile data drom DB
             this._currentUser.set(user);
             this._isLoggedIn.set(true);
 
@@ -76,7 +69,8 @@ export class AuthService {
         return false;
     }
 
-    logout(): void {
+    async logout(): Promise<void> {
+        await signOut();
         this._currentUser.set(null);
         this._isLoggedIn.set(false);
         localStorage.removeItem('currentUser');

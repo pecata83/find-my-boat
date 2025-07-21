@@ -4,3 +4,10 @@ export interface User {
     email: string;
     phone: string;
 }
+
+export interface UserLoginData {
+    userId: string;
+    signInDetails: {
+        loginId: string;
+    }
+}
