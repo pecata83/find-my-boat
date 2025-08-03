@@ -7,7 +7,7 @@ import { Hub, HubCallback } from '@aws-amplify/core';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink, AmplifyAuthenticatorModule],
+  imports: [FormsModule, AmplifyAuthenticatorModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
