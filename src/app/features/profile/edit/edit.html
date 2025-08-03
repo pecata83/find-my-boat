@@ -1,0 +1,39 @@
+<form [formGroup]="profileForm" class="profile-container" novalidate (ngSubmit)="onSubmit()">
+    <img [src]="profileForm?.get('img')?.value || 'https://placehold.co/200x200'" width="200" height="200"
+        alt="User Image" class="profile-img" />
+    <p class="profile-title">Edit Profile:</p>
+    <div class="profile-field">
+        <label for="img">Image URL:</label>
+        <input id="img" name="img" type="text" formControlName="img" class="profile-value" />
+        @if (!isImgValid() && profileForm.get('img')?.touched) {
+        <div class="error">
+            Image URL is required.
+        </div>
+        }
+    </div>
+    <div class="profile-field">
+        <label for="name">Name:</label>
+        <input id="name" name="name" type="text" formControlName="name" class="profile-value" />
+        @if (!isNameValid() && profileForm.get('name')?.touched) {
+        <div class="error">Name is required.</div>
+        }
+    </div>
+    <div class="profile-field">
+        <label for="email">Email:</label>
+        <input id="email" name="email" type="email" formControlName="email" class="profile-value" />
+        @if (profileForm.get('email')?.errors?.['required']) {
+        <span class="error">Email is required.</span>
+        }
+        @if (profileForm.get('email')?.errors?.['email']) {
+        <span class="error">Invalid email format.</span>
+        }
+    </div>
+    <div class="profile-buttons-row">
+        <a routerLink="/profile" class="profile-cancel-btn">
+            Cancel
+        </a>
+        <button type="submit" class="profile-save-btn" [disabled]="profileForm.invalid">
+            Save
+        </button>
+    </div>
+</form>

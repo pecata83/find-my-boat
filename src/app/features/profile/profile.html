@@ -1,10 +1,13 @@
-<div class="container">
-    <p>Profile data:</p>
+<div class="profile-container">
+    <img [src]="userProfile()?.img || 'https://placehold.co/200x200'" alt="User Image" class="profile-img" />
+    <p class="profile-title">Profile data:</p>
     @if(userProfile()?.name) {
-    <p>Name: {{ userProfile()?.name }}</p>
+    <p class="profile-field">Name: <span class="profile-value">{{ userProfile()?.name }}</span></p>
     }
-
     @if(userProfile()?.email) {
-    <p>Email: {{ userProfile()?.email }}</p>
+    <p class="profile-field">Email: <span class="profile-value">{{ userProfile()?.email }}</span></p>
     }
+    <a routerLink="/profile/edit" class="profile-edit-btn">
+        Edit Profile
+    </a>
 </div>

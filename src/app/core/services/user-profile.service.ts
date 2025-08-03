@@ -1,9 +1,8 @@
 import { Injectable, signal } from "@angular/core";
-import { type Schema } from '../../../../amplify/data/resource';
-import { generateClient } from 'aws-amplify/data';
 import { AuthService } from "./auth.service";
 import { User } from "../../models";
-const client = generateClient<Schema>();
+import { from, Observable } from "rxjs";
+import { dataClient } from "../utils";
 
 
 
@@ -13,8 +12,10 @@ const client = generateClient<Schema>();
 export class UserProfileService {
     private currentUser = signal<User | null>(null);
     private _userProfile = signal<any>(null);
+    private client;
 
     constructor(private authService: AuthService) {
+        this.client = dataClient
         this.currentUser.set(this.authService.currentUser());
         this.getUserData();
     }
@@ -24,16 +25,14 @@ export class UserProfileService {
     getUserData(): void {
         const user = this.currentUser();
         if (user) {
-            client.models.UserProfile.get({
+            this.client.models.UserProfile.get({
                 profileOwner: user.id + "::" + user.id
             }, { authMode: "userPool" }).then(({ data, errors }) => {
                 if (errors) {
-                    console.error("Error fetching user profile:", errors);
                     this._userProfile.set(null);
                     return;
                 }
                 this._userProfile.set(data);
-                console.log("User data:", this._userProfile());
             }).catch((err) => {
                 console.error("Unexpected error fetching user profile:", err);
                 this._userProfile.set(null);
@@ -43,4 +42,39 @@ export class UserProfileService {
             throw new Error("Error getting current user");
         }
     }
+
+    updateProfile(profileData: User): Observable<User | null> {
+        const user = this.currentUser();
+        if (!user) {
+            throw new Error("No user is currently logged in.");
+        }
+
+        return from(
+            this.client.models.UserProfile.update({
+                profileOwner: user.id + "::" + user.id,
+                ...profileData
+            }, { authMode: "userPool" })
+                .then(({ data, errors }) => {
+                    if (errors) {
+                        console.error("Error updating user profile:", errors);
+                        return null;
+                    }
+                    if (!data) {
+                        return null;
+                    }
+                    // Map the returned data to User type
+                    const mappedUser: User = {
+                        id: user.id,
+                        username: user.username,
+                        phone: user.phone,
+                        name: data.name ?? undefined,
+                        email: data.email ?? undefined,
+                        img: data.img ?? undefined,
+                    };
+                    return mappedUser;
+                })
+        );
+
+    }
+
 }

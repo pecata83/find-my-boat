@@ -26,6 +26,11 @@ export const routes: Routes = [{
     canActivate: [authGuard],
 },
 {
+    path: 'profile/edit',
+    loadComponent: () => import('./features/profile/edit/edit').then(c => c.EditProfile),
+    canActivate: [authGuard],
+},
+{
     path: '**',
     loadComponent: () => import('./shared/components/not-found/not-found').then(c => c.NotFound)
 }
