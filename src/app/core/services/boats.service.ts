@@ -21,10 +21,7 @@ export class BoatsService {
     public userProfile = this._userProfile.asReadonly();
 
     listBoats(): Observable<any[] | null> {
-        const user = this.currentUser();
-        if (!user) {
-            throw new Error("No user is currently logged in.");
-        }
+
         return from(
             this.client.models.Boat.list()
                 .then(({ data, errors }) => {

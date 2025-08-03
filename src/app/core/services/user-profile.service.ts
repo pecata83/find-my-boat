@@ -39,7 +39,8 @@ export class UserProfileService {
             });
 
         } else {
-            throw new Error("Error getting current user");
+            // throw new Error("Error getting current user");
+            console.log("Error getting current user");
         }
     }
 
