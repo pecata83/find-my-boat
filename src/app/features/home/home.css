@@ -1,45 +1,73 @@
-    .welcome {
-        text-align: center;
-        padding: 2rem;
-    }
+.welcome {
+  text-align: center;
+  padding: 2rem;
+}
 
-    .welcome h3 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        color: #333;
-    }
+.welcome h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
 
-    .welcome p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 2rem;
-        color: #666;
-    }
+.welcome p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #666;
+}
 
-    .logged ul {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-    }
+.logged ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
 
-    .logged li a {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1.5rem;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
+.logged li a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
 
-    .logged li a:hover {
-        background-color: #0056b3;
-    }
+.logged li a:hover {
+  background-color: #0056b3;
+}
 
-    .logged li a i {
-        font-size: 1.1rem;
-    }
+.logged li a i {
+  font-size: 1.1rem;
+}
+.boat-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.boat-item h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.3em;
+  color: #2c3e50;
+}
+
+.boat-item p {
+  margin: 0 0 12px 0;
+  color: #555;
+}
+
+.boat-thumb {
+  border-radius: 4px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}

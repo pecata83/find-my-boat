@@ -1,3 +1,20 @@
 <div class="container">
-  Home page
+  @if (boats?.length === 0) {
+  <p>Loading...</p>
+  } @else {
+  @if (boats && boats.length > 0) {
+  @for (boat of boats; track boat.id) {
+  <div class="boat-item col-8">
+    <h3>{{ boat.name }}</h3>
+    <p>{{ boat.description }}</p>
+    <img src="{{ boat.thumb.src }}" width="200" alt="{{ boat.name }} thumbnail" class="boat-thumb" />
+    <!-- <p>Owner: {{ boat.owner }}</p> -->
+  </div>
+  }
+  } @else {
+  <p>No boats found.</p>
+  }
+  }
+
+
 </div>
