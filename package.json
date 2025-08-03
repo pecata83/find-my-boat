@@ -1,13 +1,17 @@
 {
   "name": "find-my-boat",
   "version": "0.0.0",
+  "config": {
+    "app_id": "d2r2awgfjjzgbs"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "use-prod": "npx ampx generate outputs --app-id $npm_package_config_app_is --branch main"
   },
   "private": true,
   "dependencies": {
