@@ -12,6 +12,26 @@ This application provides a robust foundation for boat tracking and management, 
 - **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
 - **Database**: Real-time database powered by Amazon DynamoDB.
 
+# Getting Started
+
+To start Find My Boat locally:
+
+1. **Install dependencies**
+
+   ```bash
+   yarn install
+   ```
+
+2. **Run the development server**
+
+   ```bash
+   yarn start
+   ```
+
+3. **Access the app**  
+   Open [http://localhost:4200](http://localhost:4200) in your browser.
+
+Make sure you have Node.js and Yarn installed. For AWS integration, Amplify configuration is currently stored in `amplify_outputs.json` so project can be runned locally.
 
 ## Deploying to AWS
 
