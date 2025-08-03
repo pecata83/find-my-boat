@@ -32,12 +32,12 @@ const schema = a.schema({
       name: a.string(),
       thumb: a.ref("Image"),
       gallery: a.json(),
-      ownerId: a.id().required(),
       stars: a.string(),
       reviews: a.hasMany("Reviews", "boatId"),
       location: a.ref("Location"),
       anchorLocation: a.ref("Location"),
       anchorRadius: a.integer().default(0),
+      owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete'])]),
     })
     .authorization((allow) => [
       allow.groups(["ADMIN"]),
@@ -49,9 +49,9 @@ const schema = a.schema({
     .model({
       content: a.string(),
       rating: a.float(),
-      authorId: a.id().required(),
       boatId: a.id(),
       boat: a.belongsTo("Boat", "boatId"),
+      owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete'])]),
     }).authorization((allow) => [
       allow.groups(["ADMIN"]),
       allow.owner(),
