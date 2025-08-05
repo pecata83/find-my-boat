@@ -1,6 +1,5 @@
 import { Injectable, signal } from "@angular/core";
-import { AuthService } from "./auth.service";
-import { User } from "../../models";
+import { Boat } from "../../models";
 import { from, Observable } from "rxjs";
 import { dataClient } from "../utils";
 
@@ -9,29 +8,57 @@ import { dataClient } from "../utils";
     providedIn: 'root'
 })
 export class BoatsService {
-    private currentUser = signal<User | null>(null);
-    private _userProfile = signal<any>(null);
     private client;
 
-    constructor(private authService: AuthService) {
+    constructor() {
         this.client = dataClient
-        this.currentUser.set(this.authService.currentUser());
     }
 
-    public userProfile = this._userProfile.asReadonly();
-
-    listBoats(): Observable<any[] | null> {
+    listBoats(): Observable<Boat[] | null> {
 
         return from(
-            this.client.models.Boat.list()
+            this.client.models.Boat.list({ selectionSet: ["id", "name", "content", "thumb.*", "reviews.boat.id"] })
                 .then(({ data, errors }) => {
                     if (errors) {
                         console.error("Error listing boats:", errors);
-                        return data || [];
+                        // return data || [];
                     }
-                    console.error("data", data);
-                    return data ?? [];
+
+                    return (data ?? []).map((boat: any) => ({
+                        id: boat.id,
+                        name: boat.name ?? "",
+                        content: boat.content,
+                        thumb: boat.thumb,
+                        location: boat.location,
+                        reviews: boat.reviews
+                    }));
                 })
+        );
+    }
+
+    addBoat(boat: Boat): Observable<Boat | null> {
+        return from(
+            this.client.models.Boat.create({
+                name: boat.name ?? "",
+                content: boat.content,
+                thumb: boat.thumb,
+                location: boat.location
+            }, { authMode: "userPool" }).then(({ data, errors }) => {
+                if (errors) {
+                    console.error("Error adding boat:", errors);
+                    return null;
+                }
+                if (!data) {
+                    return null;
+                }
+                return {
+                    id: data.id,
+                    name: data.name ?? "",
+                    content: data.content,
+                    thumb: data.thumb,
+                    location: data.location
+                } as Boat;
+            })
         );
     }
 

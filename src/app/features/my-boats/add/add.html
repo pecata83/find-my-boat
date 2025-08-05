@@ -1,1 +1,39 @@
-<p>add works!</p>
+<form [formGroup]="boatForm" (ngSubmit)="onSubmit()" novalidate>
+    <img [src]="boatForm.get('thumb')?.value.src || 'https://placehold.co/200x200'" width="250" alt="User Image"
+        class="profile-img" />
+    <div>
+        <label for="name">Name:</label>
+        <input id="name" formControlName="name" type="text" />
+    </div>
+
+    <div>
+        <label for="content">Content:</label>
+        <textarea id="content" formControlName="content"></textarea>
+    </div>
+
+    <fieldset formGroupName="thumb">
+        <legend>Thumbnail</legend>
+        <div>
+            <label for="thumb-src">Source:</label>
+            <input id="thumb-src" formControlName="src" type="text" />
+        </div>
+        <div>
+            <label for="thumb-title">Title:</label>
+            <input id="thumb-title" formControlName="title" type="text" />
+        </div>
+    </fieldset>
+
+    <fieldset formGroupName="location">
+        <legend>Location</legend>
+        <div>
+            <label for="location-lat">Latitude:</label>
+            <input id="location-lat" formControlName="lat" type="text" />
+        </div>
+        <div>
+            <label for="location-lng">Longitude:</label>
+            <input id="location-lng" formControlName="lng" type="text" />
+        </div>
+    </fieldset>
+
+    <button type="submit">Add Boat</button>
+</form>

@@ -5,9 +5,13 @@
   @if (boats && boats.length > 0) {
   @for (boat of boats; track boat.id) {
   <div class="boat-item col-8">
-    <h3>{{ boat.name }}</h3>
-    <p>{{ boat.description }}</p>
-    <img src="{{ boat.thumb.src }}" width="200" alt="{{ boat.name }} thumbnail" class="boat-thumb" />
+    <img src="{{ boat.thumb.src }}" width="250" alt="{{ boat.name }} thumbnail" class="boat-thumb" />
+    <div>
+      <h3>{{ boat.name }}</h3>
+      <p>{{ boat.content }}</p>
+      <p>Reviews: {{ boat?.reviews?.length }}</p>
+      <div class="boat-footer"></div>
+    </div>
     <!-- <p>Owner: {{ boat.owner }}</p> -->
   </div>
   }
