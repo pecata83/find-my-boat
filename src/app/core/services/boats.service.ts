@@ -1,4 +1,4 @@
-import { Injectable, signal } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Boat } from "../../models";
 import { from, Observable } from "rxjs";
 import { dataClient } from "../utils";
@@ -17,7 +17,7 @@ export class BoatsService {
     listBoats(): Observable<Boat[] | null> {
 
         return from(
-            this.client.models.Boat.list({ selectionSet: ["id", "name", "content", "thumb.*", "reviews.boat.id"] })
+            this.client.models.Boat.list({ selectionSet: ["id", "name", "content", "thumb.*", "owner", "reviews.boat.id"] })
                 .then(({ data, errors }) => {
                     if (errors) {
                         console.error("Error listing boats:", errors);
