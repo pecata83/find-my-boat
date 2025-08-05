@@ -1,5 +1,5 @@
 <form [formGroup]="profileForm" class="profile-container" novalidate (ngSubmit)="onSubmit()">
-    <img [src]="profileForm?.get('img')?.value || 'https://placehold.co/200x200'" width="200" height="200"
+    <img [src]="profileForm.get('img')?.value || 'https://placehold.co/200x200'" width="200" height="200"
         alt="User Image" class="profile-img" />
     <p class="profile-title">Edit Profile:</p>
     <div class="profile-field">

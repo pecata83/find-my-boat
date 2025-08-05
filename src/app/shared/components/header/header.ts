@@ -3,10 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { UserProfileService } from '../../../core/services/user-profile.service';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, AmplifyAuthenticatorModule],
+  imports: [RouterLink, AmplifyAuthenticatorModule, TitleCasePipe],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
