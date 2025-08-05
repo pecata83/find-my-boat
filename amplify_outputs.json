@@ -330,6 +330,13 @@
               "isRequired": false,
               "attributes": []
             },
+            "author": {
+              "name": "author",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
             "rating": {
               "name": "rating",
               "isArray": false,
