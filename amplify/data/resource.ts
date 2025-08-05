@@ -37,7 +37,7 @@ const schema = a.schema({
       location: a.ref("Location"),
       anchorLocation: a.ref("Location"),
       anchorRadius: a.integer().default(0),
-      owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete'])]),
+      owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete']), allow.publicApiKey().to(['read'])]),
     })
     .authorization((allow) => [
       allow.groups(["ADMIN"]),
@@ -48,6 +48,7 @@ const schema = a.schema({
   Reviews: a
     .model({
       content: a.string(),
+      author: a.string(),
       rating: a.float(),
       boatId: a.id(),
       boat: a.belongsTo("Boat", "boatId"),
