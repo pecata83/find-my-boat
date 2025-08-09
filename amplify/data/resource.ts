@@ -52,7 +52,7 @@ const schema = a.schema({
       rating: a.integer(),
       boatId: a.id(),
       boat: a.belongsTo("Boat", "boatId"),
-      owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete'])]),
+      owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete']), allow.publicApiKey().to(['read'])]),
     }).authorization((allow) => [
       allow.groups(["ADMIN"]),
       allow.owner(),
