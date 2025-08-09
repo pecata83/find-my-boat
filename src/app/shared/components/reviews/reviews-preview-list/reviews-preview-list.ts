@@ -11,6 +11,7 @@ import { Review as ReviewModel } from '../../../../models';
 
 export class ReviewsPreviewList {
   @Input() reviews: ReviewModel[] = [];
+  @Input() title: string | null = null
   private authService = inject(AuthService);
   private reviewsService = inject(ReviewsService);
   readonly currentUser = this.authService.currentUser;

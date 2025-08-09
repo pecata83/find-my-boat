@@ -1,13 +1,23 @@
-<div class="profile-container">
-    <img [src]="userProfile()?.img || 'https://placehold.co/200x200'" alt="User Image" class="profile-img" />
-    <p class="profile-title">Profile data:</p>
-    @if(userProfile()?.name) {
-    <p class="profile-field">Name: <span class="profile-value">{{ userProfile()?.name }}</span></p>
-    }
-    @if(userProfile()?.email) {
-    <p class="profile-field">Email: <span class="profile-value">{{ userProfile()?.email }}</span></p>
-    }
-    <a routerLink="/profile/edit" class="profile-edit-btn">
-        Edit Profile
-    </a>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="profile-container">
+                <img [src]="userProfile()?.img || 'https://placehold.co/200x200'" alt="User Image"
+                    class="profile-img" />
+                <p class="profile-title">Profile data:</p>
+                @if(userProfile()?.name) {
+                <p class="profile-field">Name: <span class="profile-value">{{ userProfile()?.name }}</span></p>
+                }
+                @if(userProfile()?.email) {
+                <p class="profile-field">Email: <span class="profile-value">{{ userProfile()?.email }}</span></p>
+                }
+                <a routerLink="/profile/edit" class="profile-edit-btn">
+                    Edit Profile
+                </a>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <app-reviews-preview-list [title]="'My Reviews'" [reviews]="reviews || []"></app-reviews-preview-list>
+        </div>
+    </div>
 </div>

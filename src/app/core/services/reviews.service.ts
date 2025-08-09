@@ -39,6 +39,31 @@ export class ReviewsService {
         );
     }
 
+    listMyReviews(): Observable<Review[] | null> {
+
+        return from(
+            this.client.models.Reviews.list({
+                selectionSet: ["id", "content", "author", "rating", "boat.id", "boat.name", "owner"],
+                authMode: "userPool"
+            })
+                .then(({ data, errors }: { data?: any[]; errors?: any }) => {
+                    if (errors) {
+                        console.error("Error listing reviews:", errors);
+                    }
+
+                    return (data ?? []).map((review: any) => ({
+                        id: review.id,
+                        content: review.content,
+                        author: review.author,
+                        rating: review.rating,
+                        boatId: review.boat?.id,
+                        boatName: review.boat?.name,
+                        owner: review.owner
+                    }));
+                })
+        );
+    }
+
     addReview(review: Review): Observable<Review | null> {
         return from(
             this.client.models.Reviews.create({
