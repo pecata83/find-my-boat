@@ -1,0 +1,49 @@
+.boat-preview {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #fafbfc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+}
+
+.profile-img {
+  display: block;
+  margin: 0 auto 1rem auto;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
+h2 {
+  text-align: center;
+  margin: 0.5rem 0 1rem 0;
+  font-size: 1.5rem;
+  color: #2a3b4c;
+}
+
+.thumb-preview,
+.location-preview {
+  background: #f1f3f6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.thumb-preview h3,
+.location-preview h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #1a2a3a;
+}
+
+p {
+  margin: 0.3rem 0;
+  color: #444;
+}
+
+strong {
+  color: #2a3b4c;
+}

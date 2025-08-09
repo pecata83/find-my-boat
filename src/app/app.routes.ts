@@ -46,6 +46,10 @@ export const routes: Routes = [{
     canActivate: [authGuard],
 },
 {
+    path: 'boats/:boatId',
+    loadComponent: () => import('./features/boats/boats').then(c => c.Boats),
+},
+{
     path: '**',
     loadComponent: () => import('./shared/components/not-found/not-found').then(c => c.NotFound)
 }

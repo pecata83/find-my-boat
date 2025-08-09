@@ -1,0 +1,26 @@
+<div class="boat-preview">
+    <img [src]="boat?.thumb?.src || 'https://placehold.co/200x200'" width="250" alt="Boat Image" class="profile-img" />
+    <h2>{{ boat?.name }}</h2>
+    <p>{{ boat?.content }}</p>
+
+    <div class="location-preview">
+        <h3>Location</h3>
+        <p><strong>Latitude:</strong> {{ boat?.location?.lat }}</p>
+        <p><strong>Longitude:</strong> {{ boat?.location?.lng }}</p>
+    </div>
+    @if (boat?.reviews?.length) {
+    <div class="reviews-section">
+        <h3>Reviews</h3>
+        <ul>
+            @for (review of boat?.reviews; track review.id) {
+            <li>
+                <strong>{{ review.author }}</strong>: {{ review.content }}
+                @if (review.rating) {
+                <span> - Rating: {{ review.rating }}/5</span>
+                }
+            </li>
+            }
+        </ul>
+    </div>
+    }
+</div>

@@ -1,4 +1,4 @@
-// ToDo add custom css to amplify login page and unload amplify styling to optimize bundle
+/* ToDo add custom css to amplify login page and unload amplify styling to optimize bundle */
 :root,
 [data-amplify-theme] {
   --amplify-colors-pink-10: #fbc6ef;

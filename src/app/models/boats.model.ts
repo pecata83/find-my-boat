@@ -22,4 +22,6 @@ export interface Boat {
     content?: string;
     thumb?: Thumb;
     location?: Location
+    reviews?: Review[];
+    owner?: string;
 }

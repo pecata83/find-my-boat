@@ -1,7 +1,7 @@
 import { Component, effect, inject } from '@angular/core';
 import { UserProfileService } from '../../../core/services/user-profile.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 export class EditProfile {
   private userProfileService = inject(UserProfileService);
+  private router = inject(Router)
   readonly userProfile = this.userProfileService.userProfile;
 
   private fb = inject(FormBuilder);
@@ -42,7 +43,7 @@ export class EditProfile {
   onSubmit(): void {
     if (this.profileForm.valid) {
       this.userProfileService.updateProfile(this.profileForm.value).subscribe({
-        next: () => window.location.href = '/profile',
+        next: () => this.router.navigate(['/my-boats']),
         error: () => alert('Failed to update profile. Please try again.')
       });
     } else {
