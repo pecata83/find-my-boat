@@ -1,43 +1,39 @@
-<div class="boat-preview">
-    <img [src]="boat?.thumb?.src || 'https://placehold.co/200x200'" width="250" alt="Boat Image" class="profile-img" />
-    <h2>{{ boat?.name }}</h2>
-    <p>{{ boat?.content }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="boat-header d-flex flex-row gap-2">
+                <img [src]="boat?.thumb?.src || 'https://placehold.co/200x200'" width="250" alt="Boat Image"
+                    class="profile-img" />
+                <div>
+                    <h2>{{ boat?.name }}</h2>
+                    <p>{{ boat?.content }}</p>
+                </div>
+            </div>
 
-    <div class="location-preview">
-        <h3>Location</h3>
-        <p><strong>Latitude:</strong> {{ boat?.location?.lat }}</p>
-        <p><strong>Longitude:</strong> {{ boat?.location?.lng }}</p>
-    </div>
-    @if (boat?.reviews?.length) {
-    <div class="reviews-section">
-        <h3>Reviews</h3>
-        <ul>
-            @for (review of boat?.reviews; track review.id) {
-            <li>
-                <span>From: <strong>{{ review.author }}</strong></span>
-                <br>
-                @if (review.rating) {
-                <span>Rating: {{ review.rating }}/5</span>
-                }
-                <br>
-                <i>{{ review.content }}</i>
-            </li>
+            <div class="location-preview">
+                <h3>Location</h3>
+                <p><strong>Latitude:</strong> {{ boat?.location?.lat }}</p>
+                <p><strong>Longitude:</strong> {{ boat?.location?.lng }}</p>
+            </div>
+
+        </div>
+        <div class="col-12 col-md-4">
+
+            @if (boat?.reviews?.length) {
+            <app-reviews-preview-list [reviews]="boat?.reviews || []"></app-reviews-preview-list>
             }
-        </ul>
+            @if (isLoggedIn()) {
+            <div class="add-review">
+                <h4>Add Review</h4>
+                <form [formGroup]="reviewForm" (ngSubmit)="submitReview()" class="mb-3 p-3 border rounded bg-light">
+                    <label for="reviewContent">Review:</label>
+                    <textarea id="reviewContent" formControlName="content" required></textarea>
+                    <label for="reviewRating">Rating:</label>
+                    <input type="number" id="reviewRating" formControlName="rating" min="1" max="5" required />
+                    <button type="submit" [disabled]="reviewForm.invalid">Submit Review</button>
+                </form>
+            </div>
+            }
+        </div>
     </div>
-    Name: {{ userProfile()?.name || currentUser()?.username }}
-    @if (isLoggedIn()) {
-    <div class="add-review">
-        <h3>Add Review</h3>
-        <form [formGroup]="reviewForm" (ngSubmit)="submitReview()" class="mb-3 p-3 border rounded bg-light">
-            <label for="reviewContent">Review:</label>
-            <textarea id="reviewContent" formControlName="content" required></textarea>
-            <label for="reviewRating">Rating:</label>
-            <input type="number" id="reviewRating" formControlName="rating" min="1" max="5" required />
-            <button type="submit" [disabled]="reviewForm.invalid">Submit Review</button>
-        </form>
-    </div>
-    }
-    }
-
 </div>

@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { BoatsService } from '../../../core/services/boats.service';
-import { Boat } from '../../../models';
+import { Boat, Review } from '../../../models';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ReviewsPreviewList } from '../../../shared/components/reviews/reviews-preview-list/reviews-preview-list';
 
 @Component({
   selector: 'app-edit',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ReviewsPreviewList],
   templateUrl: './edit.html',
   styleUrl: './edit.css'
 })
@@ -17,11 +18,13 @@ export class Edit {
   private fb = inject(FormBuilder);
   boatForm: FormGroup;
   boatId = this.router.routerState.snapshot.root.firstChild?.params['boatId'];
+  reviews: Review[] = [];
 
   ngOnInit() {
     if (this.boatId) {
       this.boatsService.getBoat(this.boatId).subscribe((boat: Boat | null) => {
         if (boat) {
+          this.reviews = boat?.reviews || [];
           this.boatForm.patchValue(boat);
         }
       });

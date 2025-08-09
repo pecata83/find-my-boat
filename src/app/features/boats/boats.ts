@@ -3,10 +3,11 @@ import { BoatsService, AuthService, ReviewsService, UserProfileService } from '.
 import { Boat } from '../../models';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ReviewsPreviewList } from '../../shared/components/reviews/reviews-preview-list/reviews-preview-list';
 
 @Component({
   selector: 'app-boats',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ReviewsPreviewList],
   templateUrl: './boats.html',
   styleUrl: './boats.css'
 })
