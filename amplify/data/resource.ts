@@ -49,7 +49,7 @@ const schema = a.schema({
     .model({
       content: a.string(),
       author: a.string(),
-      rating: a.float(),
+      rating: a.integer(),
       boatId: a.id(),
       boat: a.belongsTo("Boat", "boatId"),
       owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete'])]),
