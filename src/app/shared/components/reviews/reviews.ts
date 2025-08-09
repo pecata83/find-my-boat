@@ -21,4 +21,20 @@ export class Reviews implements OnInit {
       this.reviews = reviews;
     });
   }
+
+  onDeleteReview(reviewId: string) {
+    if (confirm('Are you sure you want to delete this review?')) {
+      this.reviewsService.deleteReview(reviewId).subscribe({
+        next: () => {
+          this.reviewsService.listReviews().subscribe(reviews => {
+            this.reviews = reviews;
+          });
+        },
+        error: (err) => {
+          alert('Failed to delete review.');
+          console.error(err);
+        }
+      });
+    }
+  }
 }

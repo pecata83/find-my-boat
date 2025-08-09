@@ -17,11 +17,13 @@ export class ReviewsService {
     listReviews(): Observable<Review[] | null> {
 
         return from(
-            this.client.models.Reviews.list({ selectionSet: ["id", "content", "author", "rating", "boat.id", "boat.name"] })
+            this.client.models.Reviews.list({
+                selectionSet: ["id", "content", "author", "rating", "boat.id", "boat.name", "owner"],
+                limit: 7
+            })
                 .then(({ data, errors }: { data?: any[]; errors?: any }) => {
                     if (errors) {
                         console.error("Error listing reviews:", errors);
-                        // return data || [];
                     }
 
                     return (data ?? []).map((review: any) => ({

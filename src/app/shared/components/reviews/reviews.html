@@ -11,6 +11,11 @@
         }
         <br>
         <i>{{ review.content }}</i>
+        <div class="footer">
+            @if (review.owner === currentUser()?.id) {
+            <button class="btn btn-danger btn-sm" (click)="onDeleteReview(review.id)">Delete</button>
+            }
+        </div>
     </li>
     }
 </ul>
