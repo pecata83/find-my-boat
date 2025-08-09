@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BoatsList } from '../../shared/components';
+import { BoatsList, Reviews } from '../../shared/components';
 
 @Component({
   selector: 'app-my-boats',
-  imports: [BoatsList],
+  imports: [BoatsList, Reviews],
   templateUrl: './my-boats.html',
   styleUrl: './my-boats.css'
 })

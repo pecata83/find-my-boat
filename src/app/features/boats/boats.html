@@ -14,13 +14,30 @@
         <ul>
             @for (review of boat?.reviews; track review.id) {
             <li>
-                <strong>{{ review.author }}</strong>: {{ review.content }}
+                <span>From: <strong>{{ review.author }}</strong></span>
+                <br>
                 @if (review.rating) {
-                <span> - Rating: {{ review.rating }}/5</span>
+                <span>Rating: {{ review.rating }}/5</span>
                 }
+                <br>
+                <i>{{ review.content }}</i>
             </li>
             }
         </ul>
     </div>
+    Name: {{ userProfile()?.name || currentUser()?.username }}
+    @if (isLoggedIn()) {
+    <div class="add-review">
+        <h3>Add Review</h3>
+        <form [formGroup]="reviewForm" (ngSubmit)="submitReview()" class="mb-3 p-3 border rounded bg-light">
+            <label for="reviewContent">Review:</label>
+            <textarea id="reviewContent" formControlName="content" required></textarea>
+            <label for="reviewRating">Rating:</label>
+            <input type="number" id="reviewRating" formControlName="rating" min="1" max="5" required />
+            <button type="submit" [disabled]="reviewForm.invalid">Submit Review</button>
+        </form>
+    </div>
     }
+    }
+
 </div>

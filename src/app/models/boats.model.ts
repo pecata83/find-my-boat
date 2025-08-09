@@ -12,8 +12,9 @@ export type Review = {
     id: string;
     author?: string;
     content?: string;
-    rating?: string;
+    rating?: number;
     boatId?: string;
+    boatName?: string;
 }
 
 export interface Boat {

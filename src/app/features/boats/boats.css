@@ -47,3 +47,49 @@ p {
 strong {
   color: #2a3b4c;
 }
+
+.add-review form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+.add-review label {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.add-review textarea {
+  resize: vertical;
+  min-height: 60px;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.add-review input[type="number"] {
+  width: 80px;
+  padding: 6px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.add-review button[type="submit"] {
+  align-self: flex-start;
+  padding: 8px 16px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-review button[type="submit"]:disabled {
+  background: #b0c4de;
+  cursor: not-allowed;
+}

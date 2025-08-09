@@ -1,10 +1,10 @@
-<div class="container boats-list">
+<div class="boats-list">
     @if (!(boats$ | async)) {
     <p>Loading...</p>
     } @else {
 
     @for (boat of (boats$ | async); track boat.id) {
-    <div class="boat-item col-8">
+    <div class="boat-item">
         <img src="{{ boat.thumb?.src }}" width="250" alt="{{ boat.name }} thumbnail" class="boat-thumb" />
         <div>
             <h3>{{ boat.name }}</h3>

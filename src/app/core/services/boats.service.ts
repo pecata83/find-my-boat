@@ -131,7 +131,7 @@ export class BoatsService implements OnDestroy {
 
     getBoat(id: string): Observable<Boat | null> {
         return from(
-            this.client.models.Boat.get({ id }, { selectionSet: ["id", "name", "content", "thumb.*", "owner", "reviews.boat.id", "reviews.author", "reviews.content", "reviews.id", "location.*"] })
+            this.client.models.Boat.get({ id }, { selectionSet: ["id", "name", "content", "thumb.*", "owner", "reviews.boat.id", "reviews.author", "reviews.content", "reviews.id", "reviews.rating", "location.*"] })
                 .then(({ data, errors }) => {
                     if (errors) {
                         console.error("Error fetching boat:", errors);

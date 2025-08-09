@@ -19,8 +19,6 @@ export class BoatsList implements OnInit, OnDestroy {
   boats: any[] | null = null;
   boats$ = this.boatsService.boats$;
 
-
-
   ngOnInit() {
     if (this.myBoats) {
       this.boatsService.startObservingMyBoats();

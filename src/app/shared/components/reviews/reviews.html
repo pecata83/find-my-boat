@@ -1,0 +1,16 @@
+<h3>Latest Reviews</h3>
+<ul>
+    @for (review of reviews; track review.id) {
+    <li style="background-color: #f5f5f5; padding: 10px; margin-bottom: 10px; list-style: none;">
+        <span>From: <strong>{{ review.author }}</strong></span>
+        <br>
+        <span>Boat: <strong>{{ review.boatName }}</strong></span>
+        <br>
+        @if (review.rating) {
+        <span>Rating: {{ review.rating }}/5</span>
+        }
+        <br>
+        <i>{{ review.content }}</i>
+    </li>
+    }
+</ul>
