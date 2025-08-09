@@ -340,7 +340,7 @@
             "rating": {
               "name": "rating",
               "isArray": false,
-              "type": "Float",
+              "type": "Int",
               "isRequired": false,
               "attributes": []
             },
