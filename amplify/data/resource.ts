@@ -43,6 +43,7 @@ const schema = a.schema({
       allow.groups(["ADMIN"]),
       allow.owner(),
       allow.publicApiKey().to(["read"]),
+      allow.authenticated().to(["read"]),
     ]),
 
   Reviews: a
