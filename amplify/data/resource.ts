@@ -37,7 +37,7 @@ const schema = a.schema({
       location: a.ref("Location"),
       anchorLocation: a.ref("Location"),
       anchorRadius: a.integer().default(0),
-      owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete']), allow.publicApiKey().to(['read'])]),
+      owner: a.string().authorization(allow => [allow.owner().to(['read', 'delete']), allow.authenticated().to(["read"]), allow.publicApiKey().to(['read'])]),
     })
     .authorization((allow) => [
       allow.groups(["ADMIN"]),
