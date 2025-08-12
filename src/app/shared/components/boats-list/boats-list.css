@@ -14,6 +14,10 @@
   align-items: flex-start;
 }
 
+.boat-item > div {
+  flex: 1;
+}
+
 .boat-item h3 {
   margin: 0 0 8px 0;
   font-size: 1.3em;

@@ -5,18 +5,32 @@
 
     @for (boat of (boats$ | async); track boat.id) {
     <div class="boat-item">
-        <img src="{{ boat.thumb?.src }}" width="250" alt="{{ boat.name }} thumbnail" class="boat-thumb" />
+        <a [routerLink]="['/boats', boat.id]">
+
+            <img src="{{ boat.thumb?.src }}" width="250" alt="{{ boat.name }} thumbnail" class="boat-thumb" />
+        </a>
         <div>
-            <h3>{{ boat.name }}</h3>
+            <div class="d-flex justify-content-between">
+
+                <h3>
+                    <a [routerLink]="['/boats', boat.id]">
+                        {{ boat.name }}
+                    </a>
+                </h3>
+                <div>
+                    @if (boat.owner === currentUser()?.id) {
+                    <a class="btn btn-primary btn-sm me-2" [routerLink]="['/my-boats', 'edit', boat.id]">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <button class="btn btn-danger btn-sm" (click)="onDeleteBoat(boat.id)">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    }
+                </div>
+            </div>
             <p>{{ boat.content }}</p>
             <p>Reviews: {{ boat?.reviews?.length }}</p>
             <div class="boat-footer">
-                @if (boat.owner === currentUser()?.id) {
-                <a class="btn btn-primary btn-sm me-2" [routerLink]="['/my-boats', 'edit', boat.id]">Edit</a>
-                <button class="btn btn-danger btn-sm" (click)="onDeleteBoat(boat.id)">Delete</button>
-                } @else {
-                <a class="btn btn-secondary btn-sm" [routerLink]="['/boats', boat.id]">View Boat</a>
-                }
             </div>
         </div>
     </div>
