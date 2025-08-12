@@ -1,17 +1,19 @@
-import { Injectable, OnDestroy } from "@angular/core";
-import { Boat, Review } from "../../models";
+import { Injectable, OnDestroy, signal } from "@angular/core";
+import { Boat, Review, User } from "../../models";
 import { BehaviorSubject, from, Observable, Subscription } from "rxjs";
 import { dataClient } from "../utils";
-
+import { AuthService } from "./auth.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ReviewsService {
+    private currentUser = signal<User | null>(null);
     private client;
 
-    constructor() {
+    constructor(private authService: AuthService) {
         this.client = dataClient
+        this.currentUser.set(this.authService.currentUser());
     }
 
     listReviews(): Observable<Review[] | null> {
@@ -40,11 +42,15 @@ export class ReviewsService {
     }
 
     listMyReviews(): Observable<Review[] | null> {
+        const user = this.currentUser();
 
         return from(
             this.client.models.Reviews.list({
                 selectionSet: ["id", "content", "author", "rating", "boat.id", "boat.name", "owner"],
-                authMode: "userPool"
+                authMode: "userPool",
+                filter: {
+                    owner: { eq: `${user?.id}::${user?.id}` }
+                },
             })
                 .then(({ data, errors }: { data?: any[]; errors?: any }) => {
                     if (errors) {

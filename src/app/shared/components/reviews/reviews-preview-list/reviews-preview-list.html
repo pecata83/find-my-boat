@@ -4,18 +4,30 @@
         @for (review of reviews; track review.id) {
         <li
             style="background-color: #f5f5f5; list-style: none; margin-bottom: 10px; padding: 10px; border-radius: 5px;">
-            <span>From: <strong>{{ review.author }}</strong></span>
-            <br>
-            <span>Boat: <strong>{{ review.boatName }}</strong></span>
-            <br>
-            @if (review.rating) {
-            <span>Rating: {{ review.rating }}/5</span>
-            }
+            <div class="d-flex justify-content-between">
+                @if (review.rating) {
+                <span>
+                    @for (star of [].constructor(5); let i = $index; track i) {
+                    <i class="bi"
+                        [ngClass]="i < review.rating ? 'bi-star-fill text-warning' : 'bi-star text-secondary'"></i>
+                    }
+                </span>
+                }
+                @if (review.owner === currentUser()?.id) {
+                <button class="btn btn-danger btn-sm" (click)="onDeleteReview(review.id)">
+                    <i class="bi bi-trash"></i>
+                </button>
+                }
+            </div>
+            <span>
+                <i class="bi bi-person-circle pe-1"></i>
+                <strong>{{ review.author }}</strong>
+            </span>
             <br>
             <i>{{ review.content }}</i>
-            @if (review.owner === currentUser()?.id) {
-            <br><button class="btn btn-danger btn-sm" (click)="onDeleteReview(review.id)">Delete</button>
-            }
+            <br>
+            <span>Boat: <strong>{{ review.boatName }}</strong></span>
+
         </li>
         }
     </ul>

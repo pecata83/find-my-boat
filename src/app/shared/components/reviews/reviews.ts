@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ReviewsService } from '../../../core/services/';
 import { AuthService } from '../../../core/services';
 import { Review as ReviewModel } from '../../../models';
+import { ReviewsPreviewList } from './reviews-preview-list/reviews-preview-list';
 
 @Component({
   selector: 'app-reviews',
-  imports: [],
+  imports: [ReviewsPreviewList],
   templateUrl: './reviews.html',
   styleUrl: './reviews.css'
 })
