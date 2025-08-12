@@ -21,7 +21,7 @@ export class BoatsList implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.myBoats) {
-      this.boatsService.startObservingMyBoats();
+      this.boatsService.startObservingMyBoats({ userId: this.currentUser()?.id || "" });
       return;
     } else {
       this.boatsService.startObservingBoats();

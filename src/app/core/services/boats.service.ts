@@ -4,7 +4,6 @@ import { BehaviorSubject, from, map, Observable, Subscription } from "rxjs";
 import { dataClient } from "../utils";
 import { Schema } from "../../../../amplify/data/resource";
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -18,8 +17,14 @@ export class BoatsService implements OnDestroy {
         this.client = dataClient
     }
 
-    startObservingMyBoats(): void {
-        this.subscription = this.client.models.Boat.observeQuery({ selectionSet: ["id", "name", "content", "thumb.*", "owner", "reviews.boat.id", "createdAt", "updatedAt"], authMode: "userPool" }).subscribe({
+    startObservingMyBoats({ userId }: { userId: string }): void {
+        this.subscription = this.client.models.Boat.observeQuery(
+            {
+                selectionSet: ["id", "name", "content", "thumb.*", "owner", "reviews.id", "createdAt", "updatedAt"],
+                authMode: "userPool",
+                filter: { owner: { eq: `${userId}::${userId}` } }
+            },
+        ).subscribe({
             next: ({ items }) => {
                 this.boatSubject.next(
                     items.map((boat: any) => ({
@@ -34,7 +39,7 @@ export class BoatsService implements OnDestroy {
     }
 
     startObservingBoats(): void {
-        this.subscription = this.client.models.Boat.observeQuery({ selectionSet: ["id", "name", "content", "thumb.*", "owner", "reviews.boat.id", "createdAt", "updatedAt"] }).subscribe({
+        this.subscription = this.client.models.Boat.observeQuery({ selectionSet: ["id", "name", "content", "thumb.*", "owner", "reviews.id", "createdAt", "updatedAt"] }).subscribe({
             next: ({ items }) => {
                 this.boatSubject.next(
                     items.map((boat: any) => ({
