@@ -3,12 +3,34 @@ import { BoatsService } from '../../../core/services/boats.service';
 import { AuthService } from '../../../core/services';
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-boats-list',
   imports: [AsyncPipe, RouterLink, TitleCasePipe],
   templateUrl: './boats-list.html',
-  styleUrl: './boats-list.css'
+  styleUrl: './boats-list.css',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(
+          ':enter',
+          [
+            style({ opacity: 0, transform: 'translateY(20px)' }),
+            stagger(100, animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
+          ],
+          { optional: true }
+        ),
+        query(
+          ':leave',
+          [
+            stagger(100, animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' })))
+          ],
+          { optional: true }
+        )
+      ])
+    ])
+  ]
 })
 export class BoatsList implements OnInit, OnDestroy {
   @Input() myBoats: boolean = false;

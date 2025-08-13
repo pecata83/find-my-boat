@@ -94,6 +94,10 @@ Contains the main application source code.
 - **Husky** and **Commitlint** are used to enforce Git commit message standards.
 - The structure follows Angular's recommended modular architecture with `core`, `features`, and `shared` directories.
 
+## Animations
+
+Find My Boat leverages [@angular/animations](https://angular.io/guide/animations) to provide smooth transitions and interactive UI effects throughout the application. Angular Animations are used for modal dialogs, navigation transitions, and feedback elements, enhancing the overall user experience with responsive and visually appealing interactions.
+
 ## Map Integration
 
 Find My Boat uses [Leaflet](https://leafletjs.com/) for interactive map functionality, providing users with a responsive and customizable mapping experience. For marine depth and navigation data, the application integrates [OpenSeaMap](https://www.openseamap.org/), allowing users to view nautical charts and depth information directly within the app. This combination enables efficient boat tracking and route planning with real-world marine data overlays.

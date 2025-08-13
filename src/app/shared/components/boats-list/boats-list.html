@@ -1,17 +1,14 @@
-<div class="boats-list">
+<div class="boats-list" [@listAnimation]="(boats$ | async)?.length">
     @if (!(boats$ | async)) {
     <p>Loading...</p>
     } @else {
-
     @for (boat of (boats$ | async); track boat.id) {
     <div class="boat-item">
         <a [routerLink]="['/boats', boat.id]">
-
-            <img src="{{ boat.thumb?.src }}" width="250" alt="{{ boat.name }} thumbnail" class="boat-thumb" />
+            <img [src]="boat.thumb?.src" width="250" [alt]="boat.name + ' thumbnail'" class="boat-thumb" />
         </a>
         <div>
             <div class="d-flex justify-content-between">
-
                 <h3>
                     <a [routerLink]="['/boats', boat.id]">
                         {{ boat.name | titlecase }}
@@ -30,12 +27,12 @@
             </div>
             <p>{{ boat.content }}</p>
             <p>Reviews: {{ boat?.reviews?.length }}</p>
-            <div class="boat-footer">
-            </div>
+            <div class="boat-footer"></div>
         </div>
     </div>
-
     }
+    }
+
     @if (myBoats && (boats$ | async)?.length === 0) {
     <div class="d-flex flex-column align-items-center pt-4">
         <p>No boats found.</p>
@@ -44,6 +41,4 @@
         </a>
     </div>
     }
-    }
-
 </div>
