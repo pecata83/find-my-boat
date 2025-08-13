@@ -26,17 +26,10 @@
                     </div>
                 </fieldset>
 
-                <fieldset formGroupName="location">
+                <div>
                     <legend>Location</legend>
-                    <div>
-                        <label for="location-lat">Latitude:</label>
-                        <input id="location-lat" formControlName="lat" type="text" />
-                    </div>
-                    <div>
-                        <label for="location-lng">Longitude:</label>
-                        <input id="location-lng" formControlName="lng" type="text" />
-                    </div>
-                </fieldset>
+                    <app-map formControlName="location"></app-map>
+                </div>
 
                 <button type="submit">Update Boat</button>
             </form>

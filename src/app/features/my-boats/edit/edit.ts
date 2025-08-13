@@ -4,10 +4,11 @@ import { Boat, Review } from '../../../models';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReviewsPreviewList } from '../../../shared/components/reviews/reviews-preview-list/reviews-preview-list';
+import { MapComponent } from '../../../shared/components/map/map';
 
 @Component({
   selector: 'app-edit',
-  imports: [ReactiveFormsModule, ReviewsPreviewList],
+  imports: [ReactiveFormsModule, ReviewsPreviewList, MapComponent],
   templateUrl: './edit.html',
   styleUrl: './edit.css'
 })
@@ -40,10 +41,10 @@ export class Edit {
         src: [''],
         title: ['']
       }),
-      location: this.fb.group({
-        lat: [''],
-        lng: ['']
-      })
+      location: {
+        lat: 0,
+        lng: 0
+      }
     });
   }
 

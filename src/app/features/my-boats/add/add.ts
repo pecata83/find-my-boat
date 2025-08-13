@@ -3,10 +3,14 @@ import { BoatsService } from '../../../core/services/boats.service';
 import { Boat } from '../../../models';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MapComponent } from '../../../shared/components/map/map';
+import { LatLngTuple } from 'leaflet';
+
+const INITIAL_POSITION: LatLngTuple = [37.54457732085584, 23.510742187500004];
 
 @Component({
   selector: 'app-add',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MapComponent],
   templateUrl: './add.html',
   styleUrl: './add.css'
 })
@@ -27,11 +31,31 @@ export class Add {
         src: [''],
         title: ['']
       }),
-      location: this.fb.group({
-        lat: [''],
-        lng: ['']
-      })
+      location: {
+        lat: INITIAL_POSITION[0],
+        lng: INITIAL_POSITION[1]
+      }
     });
+  }
+
+  ngOnInit() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          const { latitude, longitude } = pos.coords;
+          this.boatForm.patchValue({
+            location: {
+              lat: latitude,
+              lng: longitude
+            }
+          });
+        },
+        err => {
+          console.warn('Geolocation error:', err.message);
+        },
+        { enableHighAccuracy: true }
+      );
+    }
   }
 
   onSubmit() {
