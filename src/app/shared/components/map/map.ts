@@ -36,7 +36,13 @@ export class MapComponent implements AfterViewInit, ControlValueAccessor {
   ngAfterViewInit(): void {
     const defaultIcon = new Icon({
       iconUrl: 'assets/marker-icon.png',
-      shadowUrl: 'assets/marker-shadow.png'
+      shadowUrl: 'assets/marker-shadow.png',
+      iconSize: [25, 41],
+      shadowSize: [41, 41],
+      iconAnchor: [12, 41],
+      shadowAnchor: [12, 41],
+      popupAnchor: [0, -11],
+      tooltipAnchor: [0, -11]
     });
     Marker.prototype.options.icon = defaultIcon;
     this.initMap();

@@ -11,7 +11,7 @@ import { dataClient } from "../utils";
 })
 export class UserProfileService {
     private currentUser = signal<User | null>(null);
-    private _userProfile = signal<any>(null);
+    private _userProfile = signal<User | null>(null);
     private client;
 
     constructor(private authService: AuthService) {
@@ -32,7 +32,19 @@ export class UserProfileService {
                     this._userProfile.set(null);
                     return;
                 }
-                this._userProfile.set(data);
+                if (data) {
+                    const mappedUser: User = {
+                        id: user.id,
+                        username: user.username,
+                        phone: user.phone,
+                        name: data.name ?? undefined,
+                        email: data.email ?? undefined,
+                        img: data.img ?? undefined,
+                    };
+                    this._userProfile.set(mappedUser);
+                } else {
+                    this._userProfile.set(null);
+                }
             }).catch((err) => {
                 console.error("Unexpected error fetching user profile:", err);
                 this._userProfile.set(null);
@@ -72,6 +84,8 @@ export class UserProfileService {
                         email: data.email ?? undefined,
                         img: data.img ?? undefined,
                     };
+
+                    this._userProfile.set(mappedUser);
                     return mappedUser;
                 })
         );

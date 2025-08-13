@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container pt-4">
     <div class="row">
         <div class="col-12 col-md-8">
             <div class="boat-header d-flex flex-row gap-2">
                 <img [src]="boat?.thumb?.src || 'https://placehold.co/200x200'" width="250" alt="Boat Image"
                     class="profile-img" />
-                <div>
+                <div class="d-flex flex-column justify-content-start align-items-start">
                     <h2>{{ boat?.name }}</h2>
                     <p>{{ boat?.content }}</p>
                 </div>
