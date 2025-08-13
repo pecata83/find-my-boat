@@ -33,6 +33,75 @@ To start Find My Boat locally:
 
 Make sure you have Node.js and Yarn installed. AWS Amplify configuration is currently stored in `amplify_outputs.json` so project can be started locally.
 
+# Application Structure
+
+This document provides an overview of the application's folder and file structure.
+
+## Root Directory
+
+- **.amplify/** — BE and AWS Amplify-related configuration and files.
+- **.husky/** — Git hooks managed by Husky.
+- **amplify/** — Backend resources and configuration for AWS Amplify.
+- **instructions.md** — Ai Instructions for Copilot.
+- **amplify_outputs.json** — AWS Amplify deployment outputs.
+- **amplify.yml** — Amplify build configuration.
+- **angular.json** — Angular CLI project configuration.
+- **commitlint.config.js** — Commit message linting rules.
+- **CONTRIBUTING.md** — Contribution guidelines.
+- **LICENSE** — License information.
+- **package.json** — NPM dependencies and project scripts.
+- **README.md** — Project overview and instructions.
+- **tsconfig.app.json** — TypeScript configuration for the application.
+- **tsconfig.json** — Root TypeScript configuration.
+- **tsconfig.spec.json** — TypeScript configuration for testing.
+- **yarn.lock** — Dependency lock file for Yarn.
+
+---
+
+## **src/**
+
+Contains the main application source code.
+
+### **app/**
+
+- **core/** — Core application services, interceptors, and configurations.
+- **features/** — Feature-specific modules and components.
+- **models/** — Data models and interfaces.
+- **shared/components/** — Reusable shared components.
+- **app.config.ts** — Application-level configuration.
+- **app.css** — Global styles for the application.
+- **app.html** — Root HTML template for the Angular app.
+- **app.routes.ts** — Application routes definition.
+- **app.spec.ts** — Root application tests.
+- **app.ts** — Root application TypeScript file.
+
+### **assets/**
+
+- Static files such as images, icons, and other resources.
+
+### Other files
+
+- **favicon.ico** — Application favicon.
+- **index.html** — Main HTML entry point.
+- **main.ts** — Application bootstrap file.
+- **styles.css** — Global styles.
+
+---
+
+## Notes
+
+- This project is built with **Angular** and uses **AWS Amplify** for backend services.
+- **Husky** and **Commitlint** are used to enforce Git commit message standards.
+- The structure follows Angular's recommended modular architecture with `core`, `features`, and `shared` directories.
+
+## Map Integration
+
+Find My Boat uses [Leaflet](https://leafletjs.com/) for interactive map functionality, providing users with a responsive and customizable mapping experience. For marine depth and navigation data, the application integrates [OpenSeaMap](https://www.openseamap.org/), allowing users to view nautical charts and depth information directly within the app. This combination enables efficient boat tracking and route planning with real-world marine data overlays.
+
+## Error reporting
+
+Error reporting in Find My Boat is managed using [BugSnag](https://www.bugsnag.com/), which automatically captures and reports errors to help maintain application reliability. Additionally, the application features an error modal that provides users with immediate feedback when an issue occurs, ensuring a smoother user experience and faster troubleshooting.
+
 ## Deploying to AWS
 
 For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/angular/start/quickstart/#deploy-a-fullstack-app-to-aws) of our documentation.
