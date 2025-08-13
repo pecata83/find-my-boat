@@ -31,6 +31,12 @@ To start Find My Boat locally:
 3. **Access the app**  
    Open [http://localhost:4200](http://localhost:4200) in your browser.
 
+4. **Testing credentials**
+
+   user: japeg91690@aravites.com
+
+   pass: Parola123\$
+
 Make sure you have Node.js and Yarn installed. AWS Amplify configuration is currently stored in `amplify_outputs.json` so project can be started locally.
 
 # Application Structure
