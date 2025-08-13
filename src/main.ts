@@ -5,9 +5,10 @@ import { appConfig } from './app/app.config';
 import Bugsnag from '@bugsnag/js';
 import BugsnagPerformance from '@bugsnag/browser-performance';
 import { BugsnagErrorHandler } from '@bugsnag/plugin-angular';
-import { ErrorHandler, Provider } from '@angular/core';
+import { ErrorHandler, Provider, inject } from '@angular/core';
+import { ErrorModalService } from './app/core/services/error-modal.service';
 
-// ToDo Move keys to environment variables for production
+// ToDo move to environment variables for production
 Bugsnag.start({
   apiKey: '77911f5aeee17c88421409d33d569ee2',
 });
@@ -16,10 +17,18 @@ BugsnagPerformance.start({
   apiKey: '77911f5aeee17c88421409d33d569ee2'
 });
 
+class GlobalErrorHandler extends BugsnagErrorHandler {
+  private modal = inject(ErrorModalService);
+
+  override handleError(error: any): void {
+    super.handleError(error);
+    this.modal.show(error?.message || 'Something went wrong.');
+  }
+}
 
 const bugsnagProvider: Provider = {
   provide: ErrorHandler,
-  useFactory: () => new BugsnagErrorHandler()
+  useClass: GlobalErrorHandler
 };
 
 bootstrapApplication(AppComponent, {

@@ -36,14 +36,14 @@
     </div>
 
     }
-    }
-    @if ((boats$ | async)?.length === 0) {
+    @if (myBoats && (boats$ | async)?.length === 0) {
     <div class="d-flex flex-column align-items-center pt-4">
         <p>No boats found.</p>
         <a class="btn btn-success" [routerLink]="['/my-boats', 'add']">
             <i class="bi bi-plus"></i> Add a Boat
         </a>
     </div>
+    }
     }
 
 </div>

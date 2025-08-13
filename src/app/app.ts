@@ -4,19 +4,23 @@ import { Amplify } from 'aws-amplify';
 import outputs from '../../amplify_outputs.json';
 
 import { Footer, Header } from './shared/components';
+import { ErrorModal } from './shared/components/error-modal/error-modal';
+import { ErrorModalService } from './core/services/error-modal.service';
+import { AsyncPipe } from '@angular/common';
 
 Amplify.configure(outputs);
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer],
+  imports: [RouterOutlet, Header, Footer, ErrorModal, AsyncPipe],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class AppComponent {
-  title = 'amplify-angular-template';
+  visible$ = this.modal.visible$;
+  message$ = this.modal.message$;
 
-  constructor() {
+  constructor(private modal: ErrorModalService) {
     Amplify.configure(outputs);
   }
 }

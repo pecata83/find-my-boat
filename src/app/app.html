@@ -1,5 +1,8 @@
 <app-header></app-header>
 
+<app-error-modal [visible]="(visible$ | async) ?? false" [message]="(message$ | async) ?? ''">
+</app-error-modal>
+
 <router-outlet></router-outlet>
 
 <app-footer></app-footer>
