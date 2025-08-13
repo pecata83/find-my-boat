@@ -1,12 +1,12 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { BoatsService } from '../../../core/services/boats.service';
 import { AuthService } from '../../../core/services';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-boats-list',
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, RouterLink, TitleCasePipe],
   templateUrl: './boats-list.html',
   styleUrl: './boats-list.css'
 })

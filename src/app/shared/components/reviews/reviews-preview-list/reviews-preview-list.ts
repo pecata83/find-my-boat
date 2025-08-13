@@ -1,11 +1,11 @@
 import { Component, inject, Input } from '@angular/core';
 import { AuthService, ReviewsService, } from '../../../../core/services/';
 import { Review as ReviewModel } from '../../../../models';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reviews-preview-list',
-  imports: [CommonModule],
+  imports: [CommonModule, TitleCasePipe],
   templateUrl: './reviews-preview-list.html',
   styleUrl: './reviews-preview-list.css'
 })
