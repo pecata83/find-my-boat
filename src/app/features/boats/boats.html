@@ -11,9 +11,8 @@
             </div>
 
             <div class="location-preview">
-                <h3>Location</h3>
-                <p><strong>Latitude:</strong> {{ boat?.location?.lat }}</p>
-                <p><strong>Longitude:</strong> {{ boat?.location?.lng }}</p>
+                <!-- <h3>Location</h3> -->
+                @if(boat?.location){<app-map-view [location]="boat?.location" class="map-view mb-3"></app-map-view>}
             </div>
 
         </div>

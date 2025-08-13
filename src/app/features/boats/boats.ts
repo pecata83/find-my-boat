@@ -4,10 +4,11 @@ import { Boat } from '../../models';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ReviewsPreviewList } from '../../shared/components/reviews/reviews-preview-list/reviews-preview-list';
+import { MapView } from '../../shared/components/map/map-view/map-view';
 
 @Component({
   selector: 'app-boats',
-  imports: [ReactiveFormsModule, ReviewsPreviewList],
+  imports: [ReactiveFormsModule, ReviewsPreviewList, MapView],
   templateUrl: './boats.html',
   styleUrl: './boats.css'
 })
