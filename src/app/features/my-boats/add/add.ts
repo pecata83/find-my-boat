@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { BoatsService } from '../../../core/services/boats.service';
 import { Boat } from '../../../models';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MapComponent } from '../../../shared/components/map/map';
 import { LatLngTuple } from 'leaflet';
@@ -17,24 +17,22 @@ const INITIAL_POSITION: LatLngTuple = [37.54457732085584, 23.510742187500004];
 export class Add {
   private boatsService = inject(BoatsService);
   private router = inject(Router);
-
   private fb = inject(FormBuilder);
+
   boatForm: FormGroup;
 
-
   constructor() {
-
     this.boatForm = this.fb.group({
-      name: [''],
-      content: [''],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      content: ['', [Validators.required, Validators.maxLength(500)]],
       thumb: this.fb.group({
-        src: [''],
-        title: ['']
+        src: ['', [Validators.required, Validators.pattern(/^(https?:\/\/[^\s]+)$/)]],
+        title: ['', [Validators.required, Validators.minLength(2)]]
       }),
-      location: {
+      location: this.fb.control({
         lat: INITIAL_POSITION[0],
         lng: INITIAL_POSITION[1]
-      }
+      })
     });
   }
 
@@ -67,6 +65,9 @@ export class Add {
         }
       });
       this.boatForm.reset();
+    } else {
+      // Mark all fields as touched to show errors
+      this.boatForm.markAllAsTouched();
     }
   }
 }

@@ -2,50 +2,84 @@
     <div class="row">
         <form class="col-10" [formGroup]="boatForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="d-flex justify-content-start gap-4">
-
-                <img [src]="boatForm.get('thumb')?.value.src || 'https://placehold.co/200x200'" width="250"
+                <img [src]="boatForm.get('thumb.src')?.value || 'https://placehold.co/200x200'" width="250"
                     alt="User Image" class="profile-img" />
-                <div>
 
-
-
-                </div>
-                <fieldset formGroupName="thumb">
+                <fieldset formGroupName="thumb" class="flex-grow-1">
                     <legend>Thumbnail</legend>
                     <div>
                         <label for="thumb-src">Source:</label>
                         <input id="thumb-src" formControlName="src" type="text" />
+                        @if (boatForm.get('thumb.src')?.touched && boatForm.get('thumb.src')?.invalid) {
+                        <div class="text-danger">
+                            @if (boatForm.get('thumb.src')?.errors?.['required']) {
+                            <small>Source URL is required.</small>
+                            }
+                            @if (boatForm.get('thumb.src')?.errors?.['pattern']) {
+                            <small>Enter a valid URL.</small>
+                            }
+                        </div>
+                        }
                     </div>
+
                     <div>
                         <label for="thumb-title">Title:</label>
                         <input id="thumb-title" formControlName="title" type="text" />
+                        @if (boatForm.get('thumb.title')?.touched && boatForm.get('thumb.title')?.invalid) {
+                        <div class="text-danger">
+                            @if (boatForm.get('thumb.title')?.errors?.['required']) {
+                            <small>Title is required.</small>
+                            }
+                            @if (boatForm.get('thumb.title')?.errors?.['minlength']) {
+                            <small>
+                                Title must be at least 2 characters.
+                            </small>
+                            }
+                        </div>
+                        }
                     </div>
                 </fieldset>
             </div>
             <div>
                 <label for="name">Name:</label>
                 <input id="name" formControlName="name" type="text" />
+                @if (boatForm.get('name')?.touched && boatForm.get('name')?.invalid) {
+                <div class="text-danger">
+                    @if (boatForm.get('name')?.errors?.['required']) {
+                    <small>Name is required.</small>
+                    }
+                    @if (boatForm.get('name')?.errors?.['minlength']) {
+                    <small>
+                        Name must be at least 3 characters.
+                    </small>
+                    }
+                </div>
+                }
             </div>
+
             <div>
                 <label for="content">Content:</label>
                 <textarea id="content" formControlName="content"></textarea>
+                @if (boatForm.get('content')?.touched && boatForm.get('content')?.invalid) {
+                <div class="text-danger">
+                    @if (boatForm.get('content')?.errors?.['required']) {
+                    <small>Content is required.</small>
+                    }
+                    @if (boatForm.get('content')?.errors?.['maxlength']) {
+                    <small>
+                        Content cannot exceed 500 characters.
+                    </small>
+                    }
+                </div>
+                }
             </div>
 
             <div>
                 <legend>Location</legend>
                 <app-map formControlName="location"></app-map>
-                <!-- <div>
-                    <label for="location-lat">Latitude:</label>
-                    <input id="location-lat" formControlName="lat" type="text" />
-                </div>
-                <div>
-                    <label for="location-lng">Longitude:</label>
-                    <input id="location-lng" formControlName="lng" type="text" />
-                </div> -->
-
             </div>
+            <button type="submit" class="btn btn-primary mt-3">Add Boat</button>
 
-            <button type="submit">Add Boat</button>
         </form>
     </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { BoatsService } from '../../../core/services/boats.service';
 import { Boat, Review } from '../../../models';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReviewsPreviewList } from '../../../shared/components/reviews/reviews-preview-list/reviews-preview-list';
 import { MapComponent } from '../../../shared/components/map/map';
@@ -34,12 +34,12 @@ export class Edit {
   constructor() {
 
     this.boatForm = this.fb.group({
-      id: [''],
-      name: [''],
-      content: [''],
+      id: [""],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      content: ['', [Validators.required, Validators.maxLength(500)]],
       thumb: this.fb.group({
-        src: [''],
-        title: ['']
+        src: ['', [Validators.required, Validators.pattern(/^(https?:\/\/[^\s]+)$/)]],
+        title: ['', [Validators.required, Validators.minLength(2)]]
       }),
       location: {
         lat: 0,

@@ -24,8 +24,9 @@ export class MapComponent implements AfterViewInit, ControlValueAccessor {
   private marker!: Marker;
 
   // ControlValueAccessor callbacks
-  private onChange: (value: { lat: number; lng: number }) => void = () => { };
-  private onTouched: () => void = () => { };
+  private onChange = (_: any) => { };
+  private onTouched = () => { };
+
 
   private internalValue: { lat: number; lng: number } = {
     lat: 0,
