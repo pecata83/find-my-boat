@@ -50,6 +50,10 @@ export const routes: Routes = [{
     loadComponent: () => import('./features/boats/boats').then(c => c.Boats),
 },
 {
+    path: 'boats-map',
+    loadComponent: () => import('./features/boats-map/boats-map').then(c => c.BoatsMap),
+},
+{
     path: '**',
     loadComponent: () => import('./shared/components/not-found/not-found').then(c => c.NotFound)
 }

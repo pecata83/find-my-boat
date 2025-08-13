@@ -39,7 +39,7 @@ export class BoatsService implements OnDestroy {
     }
 
     startObservingBoats(): void {
-        this.subscription = this.client.models.Boat.observeQuery({ selectionSet: ["id", "name", "content", "thumb.*", "owner", "reviews.id", "createdAt", "updatedAt"] }).subscribe({
+        this.subscription = this.client.models.Boat.observeQuery({ selectionSet: ["id", "name", "content", "location.*", "thumb.*", "owner", "reviews.id", "createdAt", "updatedAt"] }).subscribe({
             next: ({ items }) => {
                 this.boatSubject.next(
                     items.map((boat: any) => ({
