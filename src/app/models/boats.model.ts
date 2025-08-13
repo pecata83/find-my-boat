@@ -16,6 +16,7 @@ export type Review = {
     boatId?: string;
     boatName?: string;
     owner?: string;
+    boat?: Boat
 }
 
 export interface Boat {

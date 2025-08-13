@@ -26,7 +26,7 @@
             <br>
             <i>{{ review.content }}</i>
             <br>
-            <span>Boat: <strong>{{ review.boatName | titlecase}}</strong></span>
+            <span>Boat: <strong>{{ (review.boatName|| review?.boat?.name) | titlecase}}</strong></span>
 
         </li>
         }
