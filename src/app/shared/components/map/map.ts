@@ -1,9 +1,12 @@
 import {
   Component,
   AfterViewInit,
-  forwardRef
+  forwardRef,
+  Input,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
-import { Map, Icon, Marker, TileLayer, Control, LatLngExpression } from 'leaflet';
+import { Map, Icon, Marker, TileLayer, Circle } from 'leaflet';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -18,15 +21,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class MapComponent implements AfterViewInit, ControlValueAccessor {
+export class MapComponent implements AfterViewInit, ControlValueAccessor, OnChanges {
+  @Input() anchorRadius: number = 500;
+
   private map!: Map;
   private seamapContours!: TileLayer.WMS;
   private marker!: Marker;
+  private anchorCircle!: Circle;
+  private zoomLevel: number = 14;
 
   // ControlValueAccessor callbacks
   private onChange = (_: any) => { };
   private onTouched = () => { };
-
 
   private internalValue: { lat: number; lng: number } = {
     lat: 0,
@@ -48,6 +54,12 @@ export class MapComponent implements AfterViewInit, ControlValueAccessor {
     this.initMap();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['anchorRadius'] && this.anchorCircle) {
+      this.anchorCircle.setRadius(this.anchorRadius);
+    }
+  }
+
   private initMap(): void {
     const osm = new TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 
@@ -63,7 +75,7 @@ export class MapComponent implements AfterViewInit, ControlValueAccessor {
 
     this.map = new Map('map', {
       center: [this.internalValue.lat, this.internalValue.lng],
-      zoom: 8,
+      zoom: this.zoomLevel,
       layers: [osm],
       attributionControl: false
     });
@@ -81,11 +93,22 @@ export class MapComponent implements AfterViewInit, ControlValueAccessor {
       }
     });
 
-    // Draggable marker linked to form value
+    // Marker
     this.marker = new Marker([this.internalValue.lat, this.internalValue.lng], { draggable: true }).addTo(this.map);
+
+    // Anchor radius circle
+    this.anchorCircle = new Circle([this.internalValue.lat, this.internalValue.lng], {
+      radius: this.anchorRadius,
+      color: 'blue',
+      fillColor: 'blue',
+      fillOpacity: 0.15
+    }).addTo(this.map);
+
+    // Update marker + circle on drag
     this.marker.on('dragend', () => {
       const pos = this.marker.getLatLng();
       this.internalValue = { lat: pos.lat, lng: pos.lng };
+      this.anchorCircle.setLatLng(pos);
       this.onChange(this.internalValue);
       this.onTouched();
     });
@@ -97,6 +120,7 @@ export class MapComponent implements AfterViewInit, ControlValueAccessor {
       this.internalValue = value;
       if (this.marker) {
         this.marker.setLatLng([value.lat, value.lng]);
+        this.anchorCircle.setLatLng([value.lat, value.lng]);
         this.map.setView([value.lat, value.lng], this.map.getZoom());
       }
     }

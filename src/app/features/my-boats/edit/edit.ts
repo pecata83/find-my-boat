@@ -37,6 +37,7 @@ export class Edit {
       id: [""],
       name: ['', [Validators.required, Validators.minLength(3)]],
       content: ['', [Validators.required, Validators.maxLength(500)]],
+      anchorRadius: [0, [Validators.maxLength(500), Validators.min(0)]],
       thumb: this.fb.group({
         src: ['', [Validators.required, Validators.pattern(/^(https?:\/\/[^\s]+)$/)]],
         title: ['', [Validators.required, Validators.minLength(2)]]

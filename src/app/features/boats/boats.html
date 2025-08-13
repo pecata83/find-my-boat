@@ -12,7 +12,8 @@
 
             <div class="location-preview">
                 <!-- <h3>Location</h3> -->
-                @if(boat?.location){<app-map-view [location]="boat?.location" class="map-view mb-3"></app-map-view>}
+                @if(boat?.location){<app-map-view [anchorRadius]="boat?.anchorRadius ?? 0" [location]="boat?.location"
+                    class="map-view mb-3"></app-map-view>}
             </div>
 
         </div>

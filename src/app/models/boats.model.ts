@@ -27,4 +27,6 @@ export interface Boat {
     location?: Location
     reviews?: Review[];
     owner?: string;
+    anchorRadius?: number;
+    anchorLocation?: Location
 }

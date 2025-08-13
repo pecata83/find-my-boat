@@ -5,7 +5,7 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
-import { Map, Icon, Marker, TileLayer, LatLngExpression } from 'leaflet';
+import { Map, Icon, Marker, TileLayer, LatLngExpression, Circle } from 'leaflet';
 import { Location } from '../../../../models';
 
 @Component({
@@ -15,9 +15,13 @@ import { Location } from '../../../../models';
 })
 export class MapView implements AfterViewInit, OnChanges {
   @Input() location?: Location;
+  @Input() anchorRadius: number = 0;
+
   private map?: Map;
   private seamapContours!: TileLayer.WMS;
   private marker?: Marker;
+  private anchorCircle?: Circle;
+  private zoomLevel: number = 15;
 
   ngAfterViewInit(): void {
     if (this.location) {
@@ -26,8 +30,13 @@ export class MapView implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    // Update location
     if (changes['location'] && this.map) {
       this.updateMarker(this.location);
+    }
+    // Update radius
+    if (changes['anchorRadius'] && this.anchorCircle) {
+      this.anchorCircle.setRadius(this.anchorRadius);
     }
   }
 
@@ -58,10 +67,18 @@ export class MapView implements AfterViewInit, OnChanges {
 
     this.map = new Map('map', {
       center: [loc.lat, loc.lng] as LatLngExpression,
-      zoom: 14,
+      zoom: this.zoomLevel,
       layers: [osm],
       attributionControl: false
     });
+
+    // Add circle
+    this.anchorCircle = new Circle([loc.lat, loc.lng], {
+      radius: this.anchorRadius,
+      color: 'blue',
+      fillColor: 'blue',
+      fillOpacity: 0.15
+    }).addTo(this.map);
 
     this.addMarker(loc);
 
@@ -89,7 +106,11 @@ export class MapView implements AfterViewInit, OnChanges {
       this.addMarker(loc);
     } else {
       this.marker.setLatLng([loc.lat, loc.lng]);
-      this.map!.setView([loc.lat, loc.lng]);
     }
+    // Move circle too
+    if (this.anchorCircle) {
+      this.anchorCircle.setLatLng([loc.lat, loc.lng]);
+    }
+    this.map!.setView([loc.lat, loc.lng]);
   }
 }

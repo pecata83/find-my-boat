@@ -30,5 +30,11 @@
 
         </li>
         }
+
+        @if (reviews?.length === 0) {
+        <li style="list-style: none;">
+            <i class="bi bi-info-circle"></i> No reviews yet.
+        </li>
+        }
     </ul>
 </div>
