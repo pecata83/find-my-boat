@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, AfterViewInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Map, Icon, Marker, TileLayer, LatLngExpression, LatLngTuple } from 'leaflet';
+import { Map, Icon, Marker, TileLayer, LatLngTuple } from 'leaflet';
 import { Boat } from '../../../../models';
 
 interface MapLocation {
@@ -16,17 +16,23 @@ interface MapLocation {
 })
 export class MapList implements AfterViewInit, OnDestroy {
   private map!: Map;
-  private seamapContours!: TileLayer.WMS;
   private markers: Marker[] = [];
   private boatsSub!: Subscription;
 
-  @Input() boats$!: Observable<any>;
+  // ToDo add correct type for boats$
   // @Input() boats$!: Observable<Boat[]>;
+  @Input() boats$!: Observable<any>;
 
   ngAfterViewInit(): void {
     const defaultIcon = new Icon({
       iconUrl: 'assets/marker-icon.png',
-      shadowUrl: 'assets/marker-shadow.png'
+      shadowUrl: 'assets/marker-shadow.png',
+      iconSize: [25, 41],
+      shadowSize: [41, 41],
+      iconAnchor: [12, 41],
+      shadowAnchor: [12, 41],
+      popupAnchor: [0, -11],
+      tooltipAnchor: [0, -11]
     });
     Marker.prototype.options.icon = defaultIcon;
 
